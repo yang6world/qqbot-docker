@@ -9,6 +9,11 @@ git clone https://github.com/yang6world/qqbot-docker.git
 ```Bash
 mv -a /path/to/qqbot-docker/nb2 /path/to/nb2
 ```
+Or use 
+```Bash
+docker run -it -v /path/to/nb:/path/to/nb nonebot nb
+```
+to create a configuration file
 ### Docker
 ```Bash
 docker build -t nonebot .
