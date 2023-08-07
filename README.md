@@ -11,7 +11,7 @@ mv -a /path/to/qqbot-docker/nb2 /path/to/nb2
 ```
 Or use 
 ```Bash
-docker run -it -v /path/to/nb:/path/to/nb nonebot nb
+docker run -it -v /path/to/nb(You Need Change):/root/config/nb nonebot nb
 ```
 to create a configuration file
 ### Docker
@@ -20,7 +20,7 @@ docker build -t nonebot .
 ```
 
 ```Bash
-docker run -d -it -v /path/to/nb2:/root/config/nb nonebot
+docker run -d -it -v /path/to(You Need Change)/nb2:/root/config/nb nonebot
 ```
 ### Docker Compose 
 Please modify the docker-compose.yaml file to your requirements.
