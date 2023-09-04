@@ -3,10 +3,23 @@ FROM ubuntu:latest
 # environment settings
 ARG DEBIAN_FRONTEND="noninteractive"
 ARG CQHTTP_RELEASE
+ARG CPU_TYPE=amd64
 ENV HOME="/root"
 ENV PATH="$PATH:$HOME/.local/bin"
 SHELL ["/bin/bash", "-c"]
 WORKDIR /root/config/nb
+
+RUN CPU_TYPE=$(uname -m) \
+    && if [ "$CPU_TYPE" = "x86_64" ]; then \
+        echo "Detected x86_64 CPU"; \
+        export CPU_ARCH="amd64"; \
+    elif [ "$CPU_TYPE" = "aarch64" ]; then \
+        echo "Detected ARM64 CPU"; \
+        export CPU_ARCH="arm64"; \
+    else \
+        echo "Unknown CPU type"; \
+        export CPU_ARCH="unknown"; \
+    fi
 
 RUN \
   echo "**** 添加中文环境 ****" && \
@@ -106,8 +119,8 @@ RUN \
     CQHTTP_RELEASE=$(curl -sX GET https://api.github.com/repos/Mrs4s/go-cqhttp/releases/latest \
       | awk '/tag_name/{print $4;exit}' FS='[""]' | sed 's|^v||'); \
   fi && \
-  wget https://ghproxy.com/https://github.com/Mrs4s/go-cqhttp/releases/download/v${CQHTTP_RELEASE}/go-cqhttp_${CQHTTP_RELEASE}_linux_amd64.deb && \
-  dpkg -i go-cqhttp_${CQHTTP_RELEASE}_linux_amd64.deb
+  wget https://ghproxy.com/https://github.com/Mrs4s/go-cqhttp/releases/download/v${CQHTTP_RELEASE}/go-cqhttp_${CQHTTP_RELEASE}_linux_${CPU_TYPE}.deb && \
+  dpkg -i go-cqhttp_${CQHTTP_RELEASE}_linux_${CPU_TYPE}.deb
 
 RUN \ 
   echo "**** 清理缓存 ****" && \
