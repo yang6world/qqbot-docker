@@ -119,7 +119,7 @@ RUN \
     CQHTTP_RELEASE=$(curl -sX GET https://api.github.com/repos/Mrs4s/go-cqhttp/releases/latest \
       | awk '/tag_name/{print $4;exit}' FS='[""]' | sed 's|^v||'); \
   fi && \
-  wget https://ghproxy.com/https://github.com/Mrs4s/go-cqhttp/releases/download/v${CQHTTP_RELEASE}/go-cqhttp_${CQHTTP_RELEASE}_linux_${CPU_TYPE}.deb && \
+  wget https://mirror.ghproxy.com/https://github.com/Mrs4s/go-cqhttp/releases/download/v${CQHTTP_RELEASE}/go-cqhttp_${CQHTTP_RELEASE}_linux_${CPU_TYPE}.deb && \
   dpkg -i go-cqhttp_${CQHTTP_RELEASE}_linux_${CPU_TYPE}.deb
 
 RUN \ 
