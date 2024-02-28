@@ -116,8 +116,8 @@ RUN \
   /root/.local/bin/pipx install nb-cli
 RUN \
   echo "**** 安装ntqq ****" && \
-  wget https://dldir1.qq.com/qqfile/qq/QQNT/852276c1/linuxqq_3.2.5-21453_amd64.deb
-  apt install ./linuxqq_3.2.5-21453_amd64.deb -y
+  wget https://dldir1.qq.com/qqfile/qq/QQNT/852276c1/linuxqq_3.2.5-21453_amd64.deb && \
+  apt install ./linuxqq_3.2.5-21453_amd64.deb -y && \
   if [ -z ${LiteLoaderQQNT_RELEASE+x} ]; then \
     LiteLoaderQQNT_RELEASE=$(curl -sX GET https://api.github.com/repos/Mzdyl/LiteLoaderQQNT_Install/releases/latest \
       | awk '/tag_name/{print $4;exit}' FS='[""]' | sed 's|^v||'); \
