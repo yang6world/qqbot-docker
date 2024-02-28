@@ -56,38 +56,32 @@ require('/opt/LiteLoader');\
 fi
 
 pluginStoreFolder="$pluginsDir/pluginStore"
-
+function install_plugin(){
+    echo "正在拉取最新版本的插件商店..."
+    cd "$pluginsDir" || exit 1
+    sudo git clone https://github.com/Night-stars-1/LiteLoaderQQNT-Plugin-Plugin-Store pluginStore
+    sudo git clone https://github.com/LLOneBot/LLOneBot.git LLOneBot
+    if [ $? -eq 0 ]; then
+        echo "安装成功"
+    else
+        echo "安装失败"
+        exit 1
+    fi
+}
 if [ -e "$pluginsDir" ]; then
     if [ -e "$pluginsDir/LiteLoaderQQNT-Plugin-Plugin-Store/" ] || [ -e "$pluginStoreFolder" ]; then
         echo "插件商店已存在"
     else
-        echo "正在拉取最新版本的插件商店..."
-        cd "$pluginsDir" || exit 1
-        git clone https://github.com/Night-stars-1/LiteLoaderQQNT-Plugin-Plugin-Store pluginStore
-        if [ $? -eq 0 ]; then
-            echo "插件商店安装成功"
-        else
-            echo "插件商店安装失败"
-        fi
+        install_plugin()
     fi
 else
     sudo mkdir -p "$pluginsDir"
-    echo "正在拉取最新版本的插件商店..."
-    cd "$pluginsDir" || exit 1
-    sudo git clone https://github.com/Night-stars-1/LiteLoaderQQNT-Plugin-Plugin-Store pluginStore
-    if [ $? -eq 0 ]; then
-        echo "插件商店安装成功"
-    else
-        echo "插件商店安装失败"
-    fi
+    install_plugin()
 fi
 
 chmod -R 0777 /opt/LiteLoader
 
 echo "安装完成！脚本将在3秒后退出..."
-
-# 清理临时文件
-rm -rf ./LiteLoader
 
 # 错误处理
 if [ $? -ne 0 ]; then
