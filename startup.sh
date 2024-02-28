@@ -1,4 +1,4 @@
 #!/bin/bash
-cd /root/config/nb
+cd /root/nonebot
 nb run &
 wait
