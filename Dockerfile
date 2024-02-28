@@ -92,6 +92,7 @@ RUN \
     net-tools \
     netcat \
     wget \
+    git \
     sudo && \
   apt-get install  -y \
     libnss3 \                                 
