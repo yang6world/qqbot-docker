@@ -2,7 +2,8 @@ FROM ubuntu:latest
 
 # environment settings
 ARG DEBIAN_FRONTEND="noninteractive"
-ARG CQHTTP_RELEASE
+ARG LiteLoaderQQNT
+ARG LiteLoaderQQNTBot
 ARG CPU_TYPE=amd64
 ENV HOME="/root"
 ENV PATH="$PATH:$HOME/.local/bin"
@@ -114,13 +115,17 @@ RUN \
   mkdir -p /root/config && \
   /root/.local/bin/pipx install nb-cli
 RUN \
-  echo "**** 安装go-cqhttp ****" && \
-  if [ -z ${CQHTTP_RELEASE+x} ]; then \
-    CQHTTP_RELEASE=$(curl -sX GET https://api.github.com/repos/Mrs4s/go-cqhttp/releases/latest \
+  echo "**** 安装ntqq ****" && \
+  wget https://dldir1.qq.com/qqfile/qq/QQNT/852276c1/linuxqq_3.2.5-21453_amd64.deb
+  apt install ./linuxqq_3.2.5-21453_amd64.deb -y
+  if [ -z ${LiteLoaderQQNT_RELEASE+x} ]; then \
+    LiteLoaderQQNT_RELEASE=$(curl -sX GET https://api.github.com/repos/Mzdyl/LiteLoaderQQNT_Install/releases/latest \
       | awk '/tag_name/{print $4;exit}' FS='[""]' | sed 's|^v||'); \
   fi && \
-  wget https://mirror.ghproxy.com/https://github.com/Mrs4s/go-cqhttp/releases/download/v${CQHTTP_RELEASE}/go-cqhttp_${CQHTTP_RELEASE}_linux_${CPU_TYPE}.deb && \
-  dpkg -i go-cqhttp_${CQHTTP_RELEASE}_linux_${CPU_TYPE}.deb
+  wget https://mirror.ghproxy.com/https://github.com/Mzdyl/LiteLoaderQQNT_Install/releases/download/${LiteLoaderQQNT_RELEASE}/install_linux.sh && \
+  chmod +x ./install_linux.sh && \
+  bash ./install_linux.sh
+
 
 RUN \ 
   echo "**** 清理缓存 ****" && \
