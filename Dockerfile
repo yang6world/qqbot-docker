@@ -8,7 +8,7 @@ ARG CPU_TYPE=amd64
 ENV HOME="/root"
 ENV PATH="$PATH:$HOME/.local/bin"
 SHELL ["/bin/bash", "-c"]
-WORKDIR /root/config/nb
+WORKDIR /root/nonebot
 
 RUN CPU_TYPE=$(uname -m) \
     && if [ "$CPU_TYPE" = "x86_64" ]; then \
@@ -77,6 +77,7 @@ ENV LANG="zh_CN.UTF-8" \
     LC_ALL="zh_CN.UTF-8"
 RUN locale-gen zh_CN.UTF-8 && \
     update-locale LANG=zh_CN.UTF-8
+COPY install_linux.sh /root/nonebot
 RUN \
   echo "**** 安装相关依赖 ****" && \
   apt-get install -y \
@@ -138,6 +139,7 @@ RUN \
     /root/config/nb/*
 COPY startup.sh /startup.sh
 RUN chmod +x /startup.sh
+VOLUME [ "/root/nonebot","/opt/QQ", "/opt/LiteLoader" ]
 CMD ["/startup.sh"]
 
 
