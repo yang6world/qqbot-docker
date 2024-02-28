@@ -123,7 +123,6 @@ RUN \
     LiteLoaderQQNT_RELEASE=$(curl -sX GET https://api.github.com/repos/Mzdyl/LiteLoaderQQNT_Install/releases/latest \
       | awk '/tag_name/{print $4;exit}' FS='[""]' | sed 's|^v||'); \
   fi && \
-  wget https://mirror.ghproxy.com/https://github.com/Mzdyl/LiteLoaderQQNT_Install/releases/download/${LiteLoaderQQNT_RELEASE}/install_linux.sh && \
   chmod +x ./install_linux.sh && \
   bash ./install_linux.sh
 
