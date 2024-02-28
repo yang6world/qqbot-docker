@@ -4,13 +4,12 @@ pluginsDir='/opt/LiteLoader/plugins'
 
 
 echo "正在拉取最新版本的仓库..."
-cd /tmp
 rm -rf LiteLoader
 git clone https://github.com/LiteLoaderQQNT/LiteLoaderQQNT.git LiteLoader
 
 # 移动到安装目录
 echo "拉取完成，正在安装LiteLoader..."
-sudo cp -f LiteLoader/src/preload.js /opt/QQ/resources/app/application/preload.js
+sudo cp -f ./LiteLoader/src/preload.js /opt/QQ/resources/app/application/preload.js
 
 # 如果目标目录存在且不为空，则先备份处理
 if [ -e "/opt/LiteLoader" ]; then
@@ -88,7 +87,7 @@ chmod -R 0777 /opt/LiteLoader
 echo "安装完成！脚本将在3秒后退出..."
 
 # 清理临时文件
-rm -rf /tmp/LiteLoader
+rm -rf ./LiteLoader
 
 # 错误处理
 if [ $? -ne 0 ]; then
