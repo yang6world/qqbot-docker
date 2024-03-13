@@ -72,11 +72,11 @@ if [ -e "$pluginsDir" ]; then
     if [ -e "$pluginsDir/LiteLoaderQQNT-Plugin-Plugin-Store/" ] || [ -e "$pluginStoreFolder" ]; then
         echo "插件商店已存在"
     else
-        install_plugin()
+        install_plugin
     fi
 else
     sudo mkdir -p "$pluginsDir"
-    install_plugin()
+    install_plugin
 fi
 
 chmod -R 0777 /opt/LiteLoader
